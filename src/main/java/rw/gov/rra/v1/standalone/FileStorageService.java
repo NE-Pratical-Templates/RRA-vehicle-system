@@ -24,7 +24,7 @@ public class FileStorageService {
     @Value("${uploads.directory}")
     private String root;
 
-    @Value("${uploads.directory.customer_profiles}")
+    @Value("${uploads.directory.user_profiles}")
     private String userProfilesFolder;
 
     @Value("${uploads.directory.docs}")

@@ -63,32 +63,32 @@ public class MailService {
         sendEmail(to, subject, html);
     }
 
-    public void sendWithdrawalSuccessfulEmail(String to, String fullName, String amount, String balance, String accountCode, UUID customerId) {
+    public void sendWithdrawalSuccessfulEmail(String to, String fullName, String amount, String balance, String accountCode, UUID userId) {
         String subject = "Withdrawal Successful 🎉";
         String html = "<p>Hello " + fullName + ",</p>"
                 + "<p>You have withdrawn <strong>" + amount + "</strong> from account <strong>" + accountCode + "</strong>.</p>"
                 + "<p>Remaining balance: <strong>" + balance + "</strong></p>"
-                + "<p>Customer ID: " + customerId + "</p>"
+                + "<p>User ID: " + userId + "</p>"
                 + getCommonSignature();
         sendEmail(to, subject, html);
     }
 
-    public void sendSavingsStoredSuccessfullyEmail(String to, String fullName, String amount, String balance, String accountCode, UUID customerId) {
+    public void sendSavingsStoredSuccessfullyEmail(String to, String fullName, String amount, String balance, String accountCode, UUID userId) {
         String subject = "Savings Stored Successfully 🥳";
         String html = "<p>Dear " + fullName + ",</p>"
                 + "<p>You have successfully saved <strong>" + amount + "</strong> to account <strong>" + accountCode + "</strong>.</p>"
                 + "<p>Current balance: <strong>" + balance + "</strong></p>"
-                + "<p>Customer ID: " + customerId + "</p>"
+                + "<p>User ID: " + userId + "</p>"
                 + getCommonSignature();
         sendEmail(to, subject, html);
     }
 
-    public void sendTransferSuccessfulEmail(String to, String fullName, String amount, String balance, String receiverNames, String accountCode, UUID customerId) {
+    public void sendTransferSuccessfulEmail(String to, String fullName, String amount, String balance, String receiverNames, String accountCode, UUID userId) {
         String subject = "Money Transfer Successful 🥳";
         String html = "<p>Dear " + fullName + ",</p>"
                 + "<p>You transferred <strong>" + amount + "</strong> to <strong>" + receiverNames + "</strong>.</p>"
                 + "<p>Account: " + accountCode + " | Remaining Balance: " + balance + "</p>"
-                + "<p>Customer ID: " + customerId + "</p>"
+                + "<p>User ID: " + userId + "</p>"
                 + getCommonSignature();
         sendEmail(to, subject, html);
     }
