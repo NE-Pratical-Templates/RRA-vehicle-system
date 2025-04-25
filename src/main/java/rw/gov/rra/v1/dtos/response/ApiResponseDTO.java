@@ -1,4 +1,4 @@
-package rw.gov.rra.v1.dtos;
+package rw.gov.rra.v1.dtos.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

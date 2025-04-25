@@ -6,7 +6,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import rw.gov.rra.v1.dtos.ApiResponseDTO;
+import rw.gov.rra.v1.dtos.response.ApiResponseDTO;
 
 import java.util.Objects;
 

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-import rw.gov.rra.v1.dtos.ApiResponseDTO;
+import rw.gov.rra.v1.dtos.response.ApiResponseDTO;
 
 import java.io.IOException;
 

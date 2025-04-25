@@ -78,7 +78,7 @@ public class WebSecurityConfig {
             "/api/v1/auth/**",
     };
     private static final String[] ADMIN_WHITE_LIST = {
-            "/api/v1/user/all",
+            "/api/v1/admins/**",
             "/api/v1/user/search",
             "/api/v1/user/account/**",
             "/api/v1/user/delete/**",
