@@ -79,15 +79,9 @@ public class WebSecurityConfig {
     };
     private static final String[] ADMIN_WHITE_LIST = {
             "/api/v1/admins/**",
-            "/api/v1/user/search",
-            "/api/v1/user/account/**",
-            "/api/v1/user/delete/**",
-            "/api/v1/transactions/all",
-            "/api/v1/transactions/transaction/**",
-            "/api/v1/transactions/type/**",
-            "/api/v1/transactions/user/transactions/**",
-            "/api/v1/messages/all",
-            "/api/v1/messages/user/messages/**"
+            "/api/v1/plates/**",
+            "/api/v1/owners/**",
+            "/api/v1/vehicles/**"
 
     };
 }

@@ -43,7 +43,7 @@ public class Vehicle extends InitiatorAudit {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @OneToOne()
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plate_id")
     private Plate plate;
 }

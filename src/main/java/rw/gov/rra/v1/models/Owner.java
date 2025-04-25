@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import rw.gov.rra.v1.audits.InitiatorAudit;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -41,10 +42,14 @@ public class Owner extends InitiatorAudit {
 
     @Column(name = "mobile", unique = true, nullable = false)
     private String mobile;
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+
+    @Column(name = "dob")
+    private LocalDate dob;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Plate> plates = new HashSet<>();
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Vehicle> vehicles = new HashSet<>();
 
 }

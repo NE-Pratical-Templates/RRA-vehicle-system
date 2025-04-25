@@ -30,6 +30,9 @@ public class Plate extends InitiatorAudit {
     @Column(name = "status")
     private EPlateStatus status = EPlateStatus.AVAILABLE;
 
+    @Column(name = "plate_number", unique = true)
+    private String plateNumber;
+
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "issued_date")
@@ -39,7 +42,8 @@ public class Plate extends InitiatorAudit {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "vehicle_id")
+    @JoinColumn(name = "vehicle_id", nullable = true)
     private Vehicle vehicle;
 }
