@@ -39,4 +39,8 @@ public class Transfer extends InitiatorAudit {
 
     @Column(name = "amount")
     private Double amount;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private Vehicle vehicle;
 }

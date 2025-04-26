@@ -28,4 +28,6 @@ public interface IOwnerRepository extends JpaRepository<Owner, UUID> {
             "WHERE o.id = :id")
     Optional<Owner> findByIdWithPlatesAndVehicles(@Param("id") UUID id);
 
+    Optional<Owner> findByEmailAndNationalId(String oldOwnerEmail, String oldOwnerNationalID);
+
 }

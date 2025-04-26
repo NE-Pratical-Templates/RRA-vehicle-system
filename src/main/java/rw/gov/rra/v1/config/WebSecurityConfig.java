@@ -81,7 +81,8 @@ public class WebSecurityConfig {
             "/api/v1/admins/**",
             "/api/v1/plates/**",
             "/api/v1/owners/**",
-            "/api/v1/vehicles/**"
+            "/api/v1/vehicles/**",
+            "/api/v1/transfers/**"
 
     };
 }
