@@ -3,6 +3,7 @@ package rw.gov.rra.v1.services;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class VehicleServiceImpl implements IVehicleService {
     private final IVehicleRepository vehicleRepo;
     private final IOwnerRepository ownerRepo;
@@ -44,7 +46,8 @@ public class VehicleServiceImpl implements IVehicleService {
             if (!plate.getOwner().getId().equals(owner.getId())) {
                 throw new IllegalArgumentException("Plate does not belong to the selected owner");
             }
-            if (plate.getStatus() != EPlateStatus.INUSE || plate.getVehicle() != null) {
+//            log.info("model name : ",plate.getVehicle().getModelName());
+            if (plate.getStatus() == EPlateStatus.INUSE || plate.getVehicle() != null) {
                 throw new IllegalStateException("Plate is already assigned to another vehicle");
             }
             Vehicle vehicle = new Vehicle();

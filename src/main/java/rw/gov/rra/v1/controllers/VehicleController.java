@@ -66,7 +66,7 @@ public class VehicleController {
             @ApiResponse(responseCode = "401", description = "Unauthorized - Invalid or missing token")
     })
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/all/{OwnerID}")
+    @GetMapping("/owner/{OwnerID}")
     private ResponseEntity<ApiResponseDTO> getAllVehiclesByAdmin(@RequestParam(value = "page", defaultValue = Constants.DEFAULT_PAGE_NUMBER) int page, @RequestParam(value = "size", defaultValue = Constants.DEFAULT_PAGE_SIZE) int limit, @PathVariable(required = true) UUID OwnerID) {
         Pageable pageable = PageRequest.of(page, limit);
         return ResponseEntity.ok(ApiResponseDTO.success("vehicles fetched successfully", vehicleService.getAllVehiclesByOwner(pageable,OwnerID )));
