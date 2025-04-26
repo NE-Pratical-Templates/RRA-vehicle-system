@@ -65,6 +65,7 @@ public class Utility {
         String contentType = file.getContentType();
         return contentType != null && (contentType.equals(MediaType.IMAGE_JPEG_VALUE) || contentType.equals(MediaType.IMAGE_PNG_VALUE) || contentType.equals(MediaType.IMAGE_GIF_VALUE));
     }
+
     public static boolean isCodeValid(String activationCode, String sentCode) {
         return activationCode.trim().equalsIgnoreCase(sentCode.trim());
     }
@@ -75,6 +76,9 @@ public class Utility {
             return String.format("User with email '%s' already exists", user.getEmail());
         } else if (message.contains("mobile")) {
             return String.format("User with phone number '%s' already exists", user.getMobile());
+        } else if (message.contains("nationalId")) {
+            return String.format("User with national ID '%s' already exists", user.getNationalId());
+
         }
         // Add more checks for other unique constraints if necessary
         return "A unique constraint violation occurred";

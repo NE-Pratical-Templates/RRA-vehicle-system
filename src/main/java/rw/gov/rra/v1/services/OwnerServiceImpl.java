@@ -26,6 +26,7 @@ public class OwnerServiceImpl implements IOwnerService {
             owner.setFirstName(dto.getFirstName());
             owner.setLastName(dto.getLastName());
             owner.setEmail(dto.getEmail());
+            owner.setMobile(dto.getMobile());
             owner.setNationalId(dto.getNationalId());
             owner.setDob(dto.getDob());
             owner.setAddress(dto.getAddress());

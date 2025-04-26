@@ -36,8 +36,8 @@ public class AdminServiceImpl implements AdminService {
         user.setDob(dto.getDob());
 
         try {
-            Role role = roleRepo.findByName(ERole.STANDARD).orElseThrow(
-                    () -> new BadRequestException("STANDARD Role not set"));
+            Role role = roleRepo.findByName(ERole.ADMIN).orElseThrow(
+                    () -> new BadRequestException("ADMIN Role not set"));
             String encodedPassword = passwordEncoder.encode(dto.getPassword());
 
             user.setPassword(encodedPassword);
