@@ -32,8 +32,8 @@ public class SwaggerConfig {
     public OpenAPI openAPIForDev() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("🏦 BNR Banking Application API Docs")
-                        .description("This is the Swagger documentation for the BNR Banking Application backend APIs.")
+                        .title("🏦 RRA Vehicle system Application API Docs")
+                        .description("This is the Swagger documentation for the RRA Vehicle system Application backend APIs.")
                         .version("1.0.0"))
                 .servers(List.of(new Server().url(serverUrl).description("Development Server")));
     }
@@ -43,8 +43,8 @@ public class SwaggerConfig {
     public OpenAPI openAPIForProd() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("🏦 BNR Banking Application API Docs")
-                        .description("Production API documentation for the BNR Banking Application.")
+                        .title("🏦 RRA Vehicle system Application API Docs")
+                        .description("Production API documentation for the RRA Vehicle system Application.")
                         .version("1.0.0"))
                 .servers(List.of(new Server().url(serverUrl).description("Production Server")));
     }
@@ -54,8 +54,8 @@ public class SwaggerConfig {
     public OpenAPI openAPIForTest() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("🏦 BNR Banking Application API Docs")
-                        .description("Testing API documentation for the BNR Banking Application.")
+                        .title("🏦 RRA Vehicle system Application API Docs")
+                        .description("Testing API documentation for the RRA Vehicle system Application.")
                         .version("1.0.0"))
                 .servers(List.of(new Server().url(serverUrl).description("Testing Server")));
     }

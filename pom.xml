@@ -8,12 +8,12 @@
         <version>3.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>rw.bnr</groupId>
-    <artifactId>banking</artifactId>
+    <groupId>rw.gov.rra</groupId>
+    <artifactId>Vehicle</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>banking</name>
-    <description>banking system for national bank of rwanda</description>
+    <name>Vehicle</name>
+    <description>Vehicle system for Rwanda Revenue Authority</description>
     <url/>
     <licenses>
         <license/>
