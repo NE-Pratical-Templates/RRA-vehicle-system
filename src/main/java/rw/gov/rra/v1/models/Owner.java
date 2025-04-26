@@ -1,5 +1,6 @@
 package rw.gov.rra.v1.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -9,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import rw.gov.rra.v1.audits.InitiatorAudit;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -46,10 +45,10 @@ public class Owner extends InitiatorAudit {
     @Column(name = "dob")
     private LocalDate dob;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private Set<Plate> plates = new HashSet<>();
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    private List<Plate> plates = new ArrayList<>();
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private Set<Vehicle> vehicles = new HashSet<>();
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    private List<Vehicle> vehicles = new ArrayList<>();
 
 }

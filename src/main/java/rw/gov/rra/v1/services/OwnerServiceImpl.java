@@ -1,5 +1,6 @@
 package rw.gov.rra.v1.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -7,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rw.gov.rra.v1.dtos.request.CreateOwnerDTO;
-import rw.gov.rra.v1.exceptions.ResourceNotFoundException;
+import rw.gov.rra.v1.dtos.response.OwnerResponseDTO;
 import rw.gov.rra.v1.interfaces.IOwnerService;
 import rw.gov.rra.v1.models.Owner;
 import rw.gov.rra.v1.repositories.IOwnerRepository;
@@ -36,17 +37,58 @@ public class OwnerServiceImpl implements IOwnerService {
         }
     }
 
-    @Override
-    public Page<Owner> getAllOwners(Pageable pageable) {
-        return ownerRepo.findAll(pageable);
-
+    public Page<OwnerResponseDTO> getAllOwners(Pageable pageable) {
+        return ownerRepo.findAll(pageable)
+                .map(this::convertToDto);
     }
+
+
 
     @Override
     public Owner getOwnerByID(UUID id) {
-        return ownerRepo.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("owner", "id", id.toString()));
+    return  ownerRepo.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException("Owner not found with id: " + id));
     }
+
+    private OwnerResponseDTO convertToDto(Owner owner) {
+        return new OwnerResponseDTO(
+                owner.getId(),
+                owner.getFirstName(),
+                owner.getLastName(),
+                owner.getEmail(),
+                owner.getAddress(),
+                owner.getNationalId(),
+                owner.getMobile(),
+                owner.getDob()
+        );
+    }
+//    @Override
+//    public OwnerFullResponseDTO getOwnerByID(UUID id) {
+//        Owner owner = ownerRepo.findByIdWithPlatesAndVehicles(id)
+//                .orElseThrow(() -> new EntityNotFoundException("Owner not found with id: " + id));
+//
+//        Set<String> plateNumbers = owner.getPlates().stream()
+//                .map(Plate::getPlateNumber)
+//                .collect(Collectors.toSet());
+//
+//        Set<String> vehicleChassis = owner.getVehicles().stream()
+//                .map(Vehicle::getChassisNumber)
+//                .collect(Collectors.toSet());
+//
+//        return new OwnerFullResponseDTO(
+//                owner.getId(),
+//                owner.getFirstName(),
+//                owner.getLastName(),
+//                owner.getEmail(),
+//                owner.getAddress(),
+//                owner.getNationalId(),
+//                owner.getMobile(),
+//                owner.getDob(),
+//                plateNumbers,
+//                vehicleChassis
+//        );
+//    }
+
 
     @Override
     public Page<Owner> search(Pageable pageable, String searchKey) {

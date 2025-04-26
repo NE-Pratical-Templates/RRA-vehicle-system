@@ -51,7 +51,7 @@ public class PlateController {
             @ApiResponse(responseCode = "401", description = "Unauthorized - Invalid or missing token")
     })
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/all/{OwnerID}")
+    @GetMapping("/owner/{OwnerID}")
     private ResponseEntity<ApiResponseDTO> getAllPlatesOfOwner(@RequestParam(value = "page", defaultValue = Constants.DEFAULT_PAGE_NUMBER) int page, @RequestParam(value = "size", defaultValue = Constants.DEFAULT_PAGE_SIZE) int limit, @PathVariable(required = true) UUID OwnerID) {
         Pageable pageable = PageRequest.of(page, limit);
         return ResponseEntity.ok(ApiResponseDTO.success("plates fetched successfully", plateService.getAllPlatesOfOwnerByAdmin(pageable,OwnerID )));

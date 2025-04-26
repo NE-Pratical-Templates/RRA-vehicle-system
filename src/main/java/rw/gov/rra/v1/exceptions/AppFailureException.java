@@ -30,4 +30,10 @@ public class AppFailureException {
     public ResponseEntity<ApiResponseDTO> handleSqlExceptions(ConstraintViolationException exception) {
         return ResponseEntity.badRequest().body(ApiResponseDTO.error(exception.getMessage() + " - " + exception.getSQL() + " - " + exception.getSQLState(), exception.getSQLException()));
     }
+
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<ApiResponseDTO> handleResourceAlreadyExists(ResourceAlreadyExistsException exception) {
+        return ResponseEntity.status(409).body(ApiResponseDTO.error(exception.getMessage(), null));
+    }
+
 }

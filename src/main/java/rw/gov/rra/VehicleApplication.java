@@ -3,7 +3,7 @@ package rw.gov.rra;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//TODO: testing   onwer, plates , vehicle apis and then do  transfer
+//TODO: testing    plates , vehicle apis and then do  transfer
 @SpringBootApplication
 public class VehicleApplication {
 
