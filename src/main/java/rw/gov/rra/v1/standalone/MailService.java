@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import rw.gov.rra.v1.exceptions.AppException;
+import rw.gov.rra.v1.models.Vehicle;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -63,44 +64,31 @@ public class MailService {
         sendEmail(to, subject, html);
     }
 
-    public void sendWithdrawalSuccessfulEmail(String to, String fullName, String amount, String balance, String accountCode, UUID userId) {
-        String subject = "Withdrawal Successful 🎉";
-        String html = "<p>Hello " + fullName + ",</p>"
-                + "<p>You have withdrawn <strong>" + amount + "</strong> from account <strong>" + accountCode + "</strong>.</p>"
-                + "<p>Remaining balance: <strong>" + balance + "</strong></p>"
-                + "<p>User ID: " + userId + "</p>"
-                + getCommonSignature();
-        sendEmail(to, subject, html);
+    public void sendTransferNotification(String oldOwnerEmail, String newOwnerEmail, Vehicle vehicle) {
+        String subject = "Vehicle Ownership Transfer Notification";
+
+        String oldOwnerMessage = String.format(
+                "Dear Customer,\n\n" +
+                        "This is to inform you that your vehicle (Chassis Number: %s, Model: %s) has been successfully transferred to a new owner.\n\n" +
+                        "Thank you for using our services.\n\n" +
+                        "Rwanda Revenue Authority.",
+                vehicle.getChassisNumber(), vehicle.getModelName()
+        );
+
+        String newOwnerMessage = String.format(
+                "Dear Customer,\n\n" +
+                        "Congratulations! You are now the new owner of the vehicle (Chassis Number: %s, Model: %s).\n" +
+                        "Please ensure to complete any remaining formalities if required.\n\n" +
+                        "Thank you for choosing our services.\n\n" +
+                        "Rwanda Revenue Authority.",
+                vehicle.getChassisNumber(), vehicle.getModelName()
+        );
+
+        // Use your EmailService to send emails
+        sendEmail(oldOwnerEmail, subject, oldOwnerMessage);
+        sendEmail(newOwnerEmail, subject, newOwnerMessage);
     }
 
-    public void sendSavingsStoredSuccessfullyEmail(String to, String fullName, String amount, String balance, String accountCode, UUID userId) {
-        String subject = "Savings Stored Successfully 🥳";
-        String html = "<p>Dear " + fullName + ",</p>"
-                + "<p>You have successfully saved <strong>" + amount + "</strong> to account <strong>" + accountCode + "</strong>.</p>"
-                + "<p>Current balance: <strong>" + balance + "</strong></p>"
-                + "<p>User ID: " + userId + "</p>"
-                + getCommonSignature();
-        sendEmail(to, subject, html);
-    }
-
-    public void sendTransferSuccessfulEmail(String to, String fullName, String amount, String balance, String receiverNames, String accountCode, UUID userId) {
-        String subject = "Money Transfer Successful 🥳";
-        String html = "<p>Dear " + fullName + ",</p>"
-                + "<p>You transferred <strong>" + amount + "</strong> to <strong>" + receiverNames + "</strong>.</p>"
-                + "<p>Account: " + accountCode + " | Remaining Balance: " + balance + "</p>"
-                + "<p>User ID: " + userId + "</p>"
-                + getCommonSignature();
-        sendEmail(to, subject, html);
-    }
-
-    public void sendReceivedAmountEmail(String to, String fullName, String senderNames, String received, String balance) {
-        String subject = "Just Received " + received + " FRW 🥳";
-        String html = "<p>Hi " + fullName + ",</p>"
-                + "<p>You just received <strong>" + received + "</strong> from <strong>" + senderNames + "</strong>.</p>"
-                + "<p>New balance: <strong>" + balance + "</strong></p>"
-                + getCommonSignature();
-        sendEmail(to, subject, html);
-    }
 
     private void sendEmail(String to, String subject, String htmlContent) {
         try {

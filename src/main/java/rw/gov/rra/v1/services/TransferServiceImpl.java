@@ -19,6 +19,7 @@ import rw.gov.rra.v1.repositories.IOwnerRepository;
 import rw.gov.rra.v1.repositories.IPlateRepository;
 import rw.gov.rra.v1.repositories.ITransferRepository;
 import rw.gov.rra.v1.repositories.IVehicleRepository;
+import rw.gov.rra.v1.standalone.MailService;
 
 @Service
 @RequiredArgsConstructor
@@ -27,18 +28,19 @@ public class TransferServiceImpl implements ITransferService {
     private final IVehicleRepository vehicleRepo;
     private final IOwnerRepository ownerRepo;
     private final IPlateRepository plateRepo;
+    private final MailService mailService;
 
     @Override
     public Transfer createTransfer(CreateTransferDTO dto) {
         Owner oldOwner = ownerRepo.findByEmailAndNationalId(
                 dto.getOldOwnerEmail(),
                 dto.getOldOwnerNationalID()).orElseThrow(
-                        () -> new ResourceAlreadyExistsException(" no owner found with that email and national id"));
+                () -> new ResourceAlreadyExistsException(" no owner found with that email and national id"));
 
         Owner newOwner = ownerRepo.findByEmailAndNationalId(
                 dto.getNewOwnerEmail(),
                 dto.getNewOwnerNationalID()).orElseThrow(
-                        () -> new ResourceAlreadyExistsException(" no owner found with that email and national id"));
+                () -> new ResourceAlreadyExistsException(" no owner found with that email and national id"));
 
         Vehicle vehicle = vehicleRepo.findByChassisNumber(dto.getVehicleChassisNumber()).orElseThrow(
                 () -> new ResourceAlreadyExistsException(" no vehicle found with that chassis number"));
@@ -72,6 +74,8 @@ public class TransferServiceImpl implements ITransferService {
         transfer.setVehicle(vehicle);
         transfer.setAmount(dto.getAmount());
 
+        // Send Emails
+        mailService.sendTransferNotification(oldOwner.getEmail(), newOwner.getEmail(), vehicle);
         return transferRepo.save(transfer);
     }
 
